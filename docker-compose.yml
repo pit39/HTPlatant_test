@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+
+  web:
+    build: .
+    depends_on:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    restart: always
+    networks:
+      - web_net
+    volumes:
+      - .:/code/
+    ports:
+      - 8000:8000
+    container_name: python_ht-plant-web
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    restart: always
+    networks:
+      - web_net
+    ports:
+      - $POSTGRES_PORT:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    container_name: python_ht-plant-postgres_db
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+
+volumes:
+  postgres_data:
+
+networks:
+  web_net:
+    name: web_net
+    driver: bridge
