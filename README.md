@@ -21,7 +21,7 @@
 ```commandline
 docker-compose up -d --build
 ```
-- Создать мигрции 
+- Создать мигарции 
 ```commandline
 docker exec -it python_ht-plant-web python manage.py makemigrations
 ```
