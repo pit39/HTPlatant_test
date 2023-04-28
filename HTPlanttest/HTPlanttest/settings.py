@@ -23,6 +23,16 @@ POSTGRES_DB = env.str("POSTGRES_DB")
 POSTGRES_USER = env.str("POSTGRES_USER")
 POSTGRES_PASSWORD = env.str("POSTGRES_PASSWORD")
 
+# Email host settings
+
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_PORT = env.str("EMAIL_PORT")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -135,3 +145,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/'

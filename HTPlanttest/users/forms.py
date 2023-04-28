@@ -53,3 +53,11 @@ class LogInForm(forms.Form):
             raise ValidationError(message='Неверный email или пароль')
 
         return user
+
+
+class EmailChangeForm(forms.Form):
+    email = forms.EmailField(
+        label='Email',
+        max_length=254,
+        widget=forms.EmailInput(attrs={'autocomplete': 'email'})
+    )

@@ -1,0 +1,16 @@
+{% extends "users/base.html" %}
+
+
+{% block title %}Cтраница входа{% endblock %}
+
+{% block main %}
+
+<h2>Вход</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Войти</button>
+</form>
+<a href="{% url 'password_reset' %}">Забыли пароль?</a>
+
+{% endblock %}
