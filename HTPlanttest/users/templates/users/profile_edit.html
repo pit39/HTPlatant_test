@@ -1,0 +1,15 @@
+{% extends "users/base.html" %}
+
+
+{% block main %}
+    <h2>Редактирование профиля:</h2>
+<ul class="list-group">
+    <li class="list-group-item"> email: {{request.user.email}} <a href="{% url 'email_change' %}">Изменить почту</a></li>
+    <li class="list-group-item"><a href="{% url 'password_change' %}">Изменить пароль</a></li>
+</ul>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}

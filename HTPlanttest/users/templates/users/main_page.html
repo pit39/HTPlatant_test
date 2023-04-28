@@ -1,0 +1,38 @@
+{% extends "users/base.html" %}
+
+
+{% block title %}Список пользователей{% endblock %}
+
+
+{% block main %}
+
+<section class="users__list">
+    {% if request.user.is_authenticated %}
+    <h2>Добро пожаловать, {{request.user.full_name}}</h2>
+    <a href="{% url 'logout' %}">Выход</a>
+    <a href="{% url 'profile' %}">Профиль</a>
+    {% else %}
+    <a href="{% url 'login' %}">Вход</a>
+    <a href="{% url 'register' %}">Регистрация</a>
+    {% endif %}
+
+
+    <h1>Список пользователей</h1>
+    {% if users %}
+    Пользователи
+    <ul class="list-group">
+        {% for user in users %}
+        <li class="list-group-item">email: {{user.email}}, ФИО: {{user.full_name}},
+            {% if user.verified %}
+            Верифицированный пользователь
+            {% else %}
+            Верификация не пройдена
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h2>Нет зарегистрированных пользователей</h2>
+    {% endif %}
+</section>
+{% endblock %}

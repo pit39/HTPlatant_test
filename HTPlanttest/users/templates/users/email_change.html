@@ -1,0 +1,7 @@
+{% autoescape off %}
+
+Hi {{ user.get_username }},
+Для завершения cмены почты перейдите по ссылке:
+http://{{ domain }}{% url 'change_email' uidb64=uid token=token %}
+
+{% endautoescape %}
